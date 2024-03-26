@@ -21,7 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'image',
+        'bio'
     ];
+
+    protected $appends = ['image_path'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,4 +46,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+     //users that user follows
+    public function followings(){
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'following_id');
+    }
+
+     //users that follow this user
+     public function followers(){
+        return $this->belongsToMany(User::class, 'followers', 'follower_id', 'following_id');
+    }
+
+    public function articles(){
+        return $this->hasMany(Article::class);
+    }
+
+    public function getImagePathAttribute(){
+
+        if($this->image){
+            return asset($this->image);
+        }
+
+        return 'https://cdn.pixabay.com/photo/2013/07/13/10/44/man-157699_640.png';
+        
+    }
 }
