@@ -7,6 +7,12 @@
                     Dashboard
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{{route('admin.tags.index')}}">
+                    <i class="fas fa-tags"></i>
+                    Tags
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
