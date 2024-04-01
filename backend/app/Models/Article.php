@@ -29,7 +29,7 @@ class Article extends Model
         return Carbon::parse($value)->diffForHumans();
     }
 
-    public function getRouteKey(){
+    public function getRouteKeyName(){
         return 'slug';
     }
 

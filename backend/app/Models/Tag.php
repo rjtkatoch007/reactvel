@@ -12,7 +12,7 @@ class Tag extends Model
     protected $fillable = ['name', 'slug'];
 
     public function articles(){
-        return $this->belongsToMany(Article::class);
+        return $this->belongsToMany(Article::class)->published();
     }
 
     public function getRouteKeyName(){
