@@ -11,7 +11,7 @@ class StoreArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class StoreArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:255|unique:articles',
+            'body' => 'required',
+            'excerpt' => 'required',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+        ];
+    }
+
+    public function messages(){
+        return [
+            'image.max'=>'The image size must be greater than 2MB.'
         ];
     }
 }
