@@ -6,6 +6,7 @@ use App\Models\Article;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 
@@ -87,7 +88,7 @@ class ArticleController extends Controller
                 $article->tags()->sync($tags);
             }
             return response()->json([
-                'user' => $request->user(),
+                'user' => UserResource::make($request->user()),
                 'message'=>'Article has been updated successfully and will be published soon!'
             ]);
         }
@@ -95,20 +96,19 @@ class ArticleController extends Controller
 
     //delete article
     public function delete(Request $request, $article){
-        if($aticle->user_id === $request->user()->id){            
+        if($article->user_id === $request->user()->id){            
                 //remove article image
               if(File::exists($article->image)){
                 File::delete($article->image);
             }
             $article->delete();           
             return response()->json([
-                'user' => $request->user(),
+                'user' => UserResource::make($request->user()),
                 'message'=>'Article has been deleted successfully!' 
                 ]);
         }else{
-            return response()->json([
-                'user' => $request->user(),
-                'message'=>'Somthing went wrong!'  
+            return response()->json([               
+                'message'=>'Something went wrong, try again!'  
             ]);
         }
     }
