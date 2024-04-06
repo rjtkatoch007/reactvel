@@ -3,8 +3,8 @@
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\ArticleController;
 
 /*
@@ -34,10 +34,10 @@ Route::middleware('auth:sanctum')->group(function() {
 
     //articles routes
     Route::get('followers/articles', [ArticleController::class, 'fetchFollowingArticles']);
-    Route::post('add/articles', [ArticleController::class, 'store']);
-    Route::put('update/{article}/articles', [ArticleController::class, 'update']);
-    Route::delete('delete/{article}/articles', [ArticleController::class, 'delete']);
-    Route::get('clap/{article}/articles', [ArticleController::class, 'articleClap']);
+    Route::post('add/article', [ArticleController::class, 'store']);
+    Route::put('update/{article}/article', [ArticleController::class, 'update']);
+    Route::delete('delete/{article}/article', [ArticleController::class, 'delete']);
+    Route::get('clap/{article}/article', [ArticleController::class, 'articleClap']);
     
 
 });

@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\ArticleResource;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 
@@ -135,8 +136,8 @@ class ArticleController extends Controller
  //find articles
  public function fetchByTerm(Request $request){
     $searchTerm = $request->searchTerm;
-    $article = Article::where('title', 'like', '%'.$searchTerm.'%')
-    ->published()->get();    
+    $articles = Article::where('title', 'like', '%'.$searchTerm.'%')
+    ->get();    
     return ArticleResource::collection($articles);
  }
 

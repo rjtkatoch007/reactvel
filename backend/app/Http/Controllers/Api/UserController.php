@@ -32,7 +32,7 @@ class UserController extends Controller
     public function auth(AuthUserRequest $request){
         if($request->validated()){
             //create new user
-            User::whereEmail($request->email)->first();
+            $user=User::whereEmail($request->email)->first();
             if(!$user || !Hash::check($request->password, $user->password)){
                 return response()->json([
                     'error'=>'Credentials do not match any of our records!'
@@ -40,8 +40,8 @@ class UserController extends Controller
             }else{          
             //return the response
             return response()->json([
-                'user'=> UserResource::make($user),
-                'access_token'=>$user->createToken('new_user')->plainTexttoken
+                'user' => UserResource::make($user),
+                'access_token' => $user->createToken('new_user')->plainTextToken
             ]);
             }
         }

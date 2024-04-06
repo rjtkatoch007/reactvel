@@ -24,7 +24,7 @@ class ArticleResource extends JsonResource
             'image_path'=>$this->image_path,
             'clapsCount'=>$this->clapsCount,
             'created_at'=>$this->created_at,
-            'user'=>UserResource::make($this->user),
+            //'user'=>UserResource::make($this->user),
             'tags'=>$this->tags,            
         ];
     }
